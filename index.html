@@ -212,6 +212,147 @@
     line-height: 1.7;
   }
 
+  /* ===== USER TYPES ===== */
+  .user-types {
+    position: relative;
+    z-index: 1;
+    background: var(--black);
+    padding: 64px 24px;
+  }
+
+  .user-types-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .user-types-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 40px;
+    line-height: 1.2;
+  }
+
+  .user-cards {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .user-card {
+    border: 1px solid #2a2a2a;
+    overflow: hidden;
+  }
+
+  .user-card.premium {
+    border-color: var(--orange);
+  }
+
+  .user-card.owner {
+    border-color: #C9A84C;
+  }
+
+  .user-card-header {
+    padding: 16px 20px;
+    background: var(--gray);
+    border-bottom: 1px solid #2a2a2a;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .user-card.premium .user-card-header {
+    background: var(--orange);
+    border-bottom-color: rgba(255,255,255,0.2);
+  }
+
+  .user-card.owner .user-card-header {
+    background: #1a1500;
+    border-bottom-color: #C9A84C;
+  }
+
+  .user-card-tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 2px 8px;
+    flex-shrink: 0;
+  }
+
+  .user-card.premium .user-card-tag {
+    color: var(--cream);
+    border-color: var(--cream);
+  }
+
+  .user-card.owner .user-card-tag {
+    color: #C9A84C;
+    border-color: #C9A84C;
+  }
+
+  .user-card-name {
+    font-weight: 700;
+    font-size: 15px;
+    flex: 1;
+  }
+
+  .user-card-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  .user-card.premium .user-card-price {
+    color: rgba(255,255,255,0.8);
+  }
+
+  .user-card.premium .user-card-price span {
+    color: var(--cream);
+    font-size: 20px;
+  }
+
+  .user-card.owner .user-card-price {
+    color: #C9A84C;
+  }
+
+  .user-card-list {
+    list-style: none;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .user-card-list li {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ccc;
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .user-card-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--orange);
+    font-weight: 900;
+    font-size: 12px;
+  }
+
+  .user-card.premium .user-card-list li::before { color: var(--orange); }
+  .user-card.owner .user-card-list li::before { color: #C9A84C; }
+
   /* ===== HOW IT WORKS ===== */
   .how {
     position: relative;
@@ -432,6 +573,59 @@
         <div class="feature-desc">気になる相手をお気に入りに追加しておくと、練習募集が出たときにすぐ通知が届きます。</div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- USER TYPES -->
+<div class="section-divider"></div>
+<section class="user-types">
+  <div class="user-types-label">WHO IS IT FOR</div>
+  <div class="user-types-title">あなたに合った<br>使い方で始めよう</div>
+  <div class="user-cards">
+
+    <!-- 一般ユーザー -->
+    <div class="user-card">
+      <div class="user-card-header">
+        <div class="user-card-tag">FREE</div>
+        <div class="user-card-name">一般ユーザー</div>
+        <div class="user-card-price">無料</div>
+      </div>
+      <ul class="user-card-list">
+        <li>無料で使える</li>
+        <li>体重・種目・エリアで絞り込める</li>
+        <li>相手の評価が見えるから安心</li>
+        <li>お気に入り登録で練習募集を通知</li>
+      </ul>
+    </div>
+
+    <!-- プレミアムユーザー -->
+    <div class="user-card premium">
+      <div class="user-card-header">
+        <div class="user-card-tag">PREMIUM</div>
+        <div class="user-card-name">プレミアムユーザー</div>
+        <div class="user-card-price">今なら<span>無料</span></div>
+      </div>
+      <ul class="user-card-list">
+        <li>一般ユーザーの全機能</li>
+        <li>練習セッションを自分で作成・募集できる</li>
+        <li>🎉 リリース記念で現在無料開放中！</li>
+      </ul>
+    </div>
+
+    <!-- ジムオーナー -->
+    <div class="user-card owner">
+      <div class="user-card-header">
+        <div class="user-card-tag">OWNER</div>
+        <div class="user-card-name">ジムオーナー</div>
+        <div class="user-card-price">月額1,000円</div>
+      </div>
+      <ul class="user-card-list">
+        <li>ジムの掲載・広告ができる</li>
+        <li>レッスンの空き時間をレンタルとして募集できる</li>
+        <li>会員の練習相手探しをサポート</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
