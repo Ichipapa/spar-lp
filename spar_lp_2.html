@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPAR — 格闘技の練習相手マッチングアプリ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0f0f0f;
+    --orange: #E8593C;
+    --cream: #f0ede8;
+    --gray: #1a1a1a;
+    --muted: #666;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ===== STRIPE PATTERN ===== */
+  .stripes {
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      75deg,
+      transparent,
+      transparent 80px,
+      rgba(255,255,255,0.015) 80px,
+      rgba(255,255,255,0.015) 81px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 24px 60px;
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--orange);
+    border: 1px solid var(--orange);
+    padding: 4px 14px;
+    display: inline-block;
+    margin-bottom: 32px;
+  }
+
+  .app-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 22px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    outline: 2px solid var(--cream);
+    box-shadow: 0 12px 40px rgba(232,89,60,0.3);
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(52px, 14vw, 88px);
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 8px;
+  }
+
+  .hero-title span { color: var(--orange); }
+
+  .hero-rule {
+    width: 100%;
+    max-width: 320px;
+    height: 5px;
+    background: var(--cream);
+    margin: 20px auto;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: #aaa;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+
+  /* CTA BUTTON */
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--orange);
+    color: var(--cream);
+    text-decoration: none;
+    padding: 18px 36px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 3px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0.1);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .cta-btn:hover::after { opacity: 1; }
+  .cta-btn:active { transform: scale(0.98); }
+
+  .cta-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cta-note {
+    margin-top: 12px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    width: 100%;
+    height: 5px;
+    background: var(--cream);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== FEATURES ===== */
+  .features {
+    position: relative;
+    z-index: 1;
+    background: var(--orange);
+    padding: 64px 24px;
+  }
+
+  .features-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .feature-list {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .feature-item:first-child { border-top: 1px solid rgba(255,255,255,0.15); }
+
+  .feature-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: rgba(255,255,255,0.2);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 40px;
+  }
+
+  .feature-text { flex: 1; }
+
+  .feature-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--cream);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+
+  .feature-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how {
+    position: relative;
+    z-index: 1;
+    padding: 64px 24px;
+    background: var(--gray);
+  }
+
+  .how-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .how-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .steps {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--orange), transparent);
+  }
+
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 32px;
+    position: relative;
+  }
+
+  .step:last-child { padding-bottom: 0; }
+
+  .step-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 16px;
+    color: var(--cream);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-body { padding-top: 6px; }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .step-desc {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* ===== FREE BADGE ===== */
+  .free-section {
+    position: relative;
+    z-index: 1;
+    background: var(--black);
+    padding: 64px 24px;
+    text-align: center;
+    border-top: 5px solid var(--cream);
+  }
+
+  .free-badge {
+    display: inline-block;
+    border: 2px solid var(--orange);
+    padding: 6px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--orange);
+    margin-bottom: 20px;
+  }
+
+  .free-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(40px, 12vw, 72px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .free-title span { color: var(--orange); }
+
+  .free-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    position: relative;
+    z-index: 1;
+    background: var(--orange);
+    padding: 32px 24px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+
+  .footer-copy {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="stripes"></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">MARTIAL ARTS APP</div>
+
+  <div class="app-icon">
+    <svg width="100" height="100" viewBox="0 0 680 680" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="roundclip">
+          <rect x="0" y="0" width="680" height="680" rx="140"/>
+        </clipPath>
+      </defs>
+      <g clip-path="url(#roundclip)">
+        <rect x="0" y="0" width="680" height="340" fill="#0f0f0f"/>
+        <rect x="0" y="340" width="680" height="340" fill="#E8593C"/>
+        <rect x="0" y="336" width="680" height="8" fill="#f0ede8"/>
+        <line x1="80" y1="0" x2="200" y2="680" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+        <line x1="200" y1="0" x2="320" y2="680" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+        <line x1="360" y1="0" x2="480" y2="680" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+        <line x1="480" y1="0" x2="600" y2="680" stroke="#ffffff" stroke-width="1" opacity="0.06"/>
+        <text x="340" y="410" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="230" font-weight="900" fill="none" stroke="#0f0f0f" stroke-width="16" letter-spacing="-5">SPAR</text>
+        <text x="340" y="410" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="230" font-weight="900" fill="#f0ede8" letter-spacing="-5">SPAR</text>
+      </g>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">格闘技の<br><span>練習相手</span>が<br>見つかる</h1>
+
+  <div class="hero-rule"></div>
+
+  <p class="hero-sub">体重・種目・エリアで絞り込んで<br>ぴったりの練習相手をマッチング</p>
+
+  <a href="https://apps.apple.com/jp/app/spar/id6778838589" class="cta-btn">
+    <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    App Storeで無料DL
+  </a>
+  <p class="cta-note">iOS対応 · 完全無料</p>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"></div>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="features-label">FEATURES</div>
+  <div class="feature-list">
+    <div class="feature-item">
+      <div class="feature-num">1</div>
+      <div class="feature-text">
+        <div class="feature-title">体重・種目・エリアで絞り込める</div>
+        <div class="feature-desc">キック・柔術・MMAなど種目ごとに、自分に合った条件で練習相手を検索できます。</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">2</div>
+      <div class="feature-text">
+        <div class="feature-title">相手の評価が見えるから安心</div>
+        <div class="feature-desc">練習後の評価が蓄積されるので、初めての相手でも信頼できる人かどうかわかります。</div>
+      </div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">3</div>
+      <div class="feature-text">
+        <div class="feature-title">お気に入り登録で練習募集を通知</div>
+        <div class="feature-desc">気になる相手をお気に入りに追加しておくと、練習募集が出たときにすぐ通知が届きます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="how-label">HOW IT WORKS</div>
+  <div class="how-title">使い方</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-dot">1</div>
+      <div class="step-body">
+        <div class="step-title">アカウントを作成</div>
+        <div class="step-desc">格闘技の種目・体重・エリアを登録するだけ。すぐに始められます。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">2</div>
+      <div class="step-body">
+        <div class="step-title">練習相手を探す</div>
+        <div class="step-desc">条件で絞り込んで、評価を確認しながら気になる相手を見つける。</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-dot">3</div>
+      <div class="step-body">
+        <div class="step-title">練習してレビュー</div>
+        <div class="step-desc">練習後に評価を残してコミュニティを盛り上げましょう。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE -->
+<section class="free-section">
+  <div class="free-badge">LIMITED OFFER</div>
+  <h2 class="free-title">今は<span>完全</span><br>無料</h2>
+  <p class="free-sub">リリース記念として、現在すべての機能を<br>無料で使えます。今すぐ試してみてください。</p>
+  <a href="https://apps.apple.com/jp/app/spar/id6778838589" class="cta-btn">
+    <svg class="cta-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+    App Storeで無料DL
+  </a>
+  <p class="cta-note" style="margin-top:12px;">iOS対応</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">SPAR</div>
+  <div class="footer-copy">© 2026 SPAR. All rights reserved.</div>
+</footer>
+
+</body>
+</html>
