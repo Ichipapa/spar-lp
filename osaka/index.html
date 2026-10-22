@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大阪でスパーリング相手・練習相手を探す方法【キック・柔術・MMA】｜SPAR</title>
-<meta name="description" content="ジムに体重の合う相手がいない、ジムに通っていない…。大阪で格闘技の練習相手を見つける方法を、所属ジム・出稽古・募集掲示板・サークル・アプリに分けて、良い点と注意点つきで紹介します。">
+<meta name="description" content="ジムに体重の合う相手がいない、ジムに通っていない…。大阪で格闘技の練習相手を見つける5つの方法を、良い点と注意点つきで紹介。自分の体重や現在地からの距離で練習会を絞り込めるアプリの使い方も解説します。">
 <link rel="canonical" href="https://ichipapa.github.io/spar-lp/osaka/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="SPAR">
@@ -21,10 +21,10 @@
   "@context": "https://schema.org",
   "@type": "Article",
   "headline": "大阪でスパーリング相手・練習相手を探す方法【キック・柔術・MMA】",
-  "description": "大阪で格闘技の練習相手を見つける方法を、所属ジム・出稽古・募集掲示板・サークル・アプリに分けて紹介します。",
+  "description": "大阪で格闘技の練習相手を見つける方法を、所属ジム・出稽古・募集掲示板・サークル・アプリに分けて紹介。体重や現在地からの距離で練習会を絞り込む手順も解説します。",
   "image": "https://ichipapa.github.io/spar-lp/images/og.png",
   "datePublished": "2026-10-20",
-  "dateModified": "2026-10-20",
+  "dateModified": "2026-10-22",
   "inLanguage": "ja",
   "mainEntityOfPage": "https://ichipapa.github.io/spar-lp/osaka/",
   "author": { "@type": "Organization", "name": "SPAR" },
@@ -308,6 +308,47 @@
     letter-spacing: 1px;
   }
 
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 4px 0 20px;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 12px 16px 12px 52px;
+    background: var(--gray);
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--body);
+  }
+
+  .steps li::before {
+    content: counter(step, decimal-leading-zero);
+    position: absolute;
+    left: 16px;
+    top: 10px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--orange);
+  }
+
+  .faq { margin: 4px 0 20px; }
+
+  .faq h3 {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.7;
+    color: var(--cream);
+    margin: 20px 0 6px;
+  }
+
+  .faq h3::before { content: 'Q. '; color: var(--orange); }
+
   @media (min-width: 640px) {
     .proscons { grid-template-columns: 1fr 1fr; }
   }
@@ -323,7 +364,7 @@
 <main class="article">
   <div class="eyebrow">GUIDE · OSAKA</div>
   <h1>大阪でスパーリング相手・練習相手を探す方法【キック・柔術・MMA】</h1>
-  <p class="meta">2026年10月20日 ・ SPAR編集部</p>
+  <p class="meta">2026年10月20日 公開 ・ 2026年10月22日 更新 ・ SPAR編集部</p>
   <div class="rule"></div>
 
   <p>格闘技を続けていると、一度はこんな悩みにぶつかります。</p>
@@ -332,7 +373,7 @@
     <li>ジムには通っていないけど、<strong>たまにスパーリングや打ち込みがしたい</strong></li>
     <li>仕事の都合で、<strong>ジムのクラスの時間に行けない</strong></li>
   </ul>
-  <p>この記事では、大阪で格闘技の練習相手を見つける方法を5つ、それぞれの良い点と注意点をあわせて紹介します。</p>
+  <p>この記事では、キックボクシング・ブラジリアン柔術・MMAなどの練習相手を大阪で見つける方法を5つ、それぞれの良い点と注意点をあわせて紹介します。後半では、自分の体重や近さで練習会を絞り込める手順もまとめています。</p>
 
   <h2><span class="num">01</span>所属しているジムで相手をお願いする</h2>
   <p>一番の近道は、今通っているジムの仲間に声をかけることです。</p>
@@ -369,7 +410,9 @@
   <p>SPARは、格闘技の練習相手を探すためのアプリです（iPhone向け・無料）。「ジムに体重の合う相手がいない」「ジムに通わずに練習したい」という人に向けて作りました。</p>
   <div class="spar-box">
     <ul>
-      <li><strong>種目・レベル・体重・エリアで絞り込んで</strong>、自分に合った練習会を探せる</li>
+      <li><strong>自分の体重に合う練習会だけ</strong>を表示できる。プロフィールに登録した体重を使うので、毎回入力する必要はない（体重の条件がない練習会は「誰でもOK」として表示）</li>
+      <li><strong>現在地から5km・10km・30km以内</strong>に絞り込めるので、通いやすい練習会を探しやすい</li>
+      <li><strong>種目・レベル</strong>でも絞り込める</li>
       <li>練習後の<strong>評価が見られる</strong>ので、初めての相手でもどんな人か分かる</li>
       <li>自分で練習会を作って「体重◯〜◯kg」「強度はライト」のように<strong>条件をつけて募集</strong>できる</li>
       <li>気になる相手を<strong>お気に入り登録</strong>しておくと、その人が練習を募集した時に通知が届く</li>
@@ -382,6 +425,17 @@
     <p class="cta-note">iPhone対応 · 今はすべての機能が無料</p>
   </div>
 
+  <h2>SPARで大阪の練習相手を探す手順</h2>
+  <p>体重と距離の絞り込みを使うと、「体重が合って、通える範囲」の練習会だけを見られます。</p>
+  <ol class="steps">
+    <li>App Storeから無料でダウンロードし、プロフィールに<strong>種目と体重</strong>を登録する</li>
+    <li>「さがす」画面で「絞り込み」を開き、<strong>「自分の体重に合う練習会だけ表示」</strong>をオンにする</li>
+    <li><strong>「現在地からの距離」</strong>で5km／10km／30kmを選ぶ（位置情報の許可が必要）</li>
+    <li>気になる練習会の内容と、主催者の<strong>評価</strong>を確認して参加を申し込む。主催者に<strong>承認されたら参加</strong>できる</li>
+    <li>合う練習会がなければ、体重や強度の条件をつけて<strong>自分で練習会を作って募集</strong>する</li>
+  </ol>
+  <p>最初は距離を「指定なし」や30kmにして広めに探し、候補が多ければ10km・5kmに狭めるのがおすすめです。</p>
+
   <h2>初対面の相手と安全に練習するコツ</h2>
   <p>どの方法で相手を見つけても、初めての相手と練習する時は次のことを意識しておくと安心です。</p>
   <ul class="tips">
@@ -390,6 +444,18 @@
     <li><b>練習できる場所を選ぶ</b>マットのあるジムやレンタルスペースなど、ケガをしにくい場所で。</li>
     <li><b>無理をしない</b>柔術やグラップリングでは早めにタップ。体調が悪い日は無理に練習しない。</li>
   </ul>
+
+  <h2>よくある質問</h2>
+  <div class="faq">
+    <h3>ジムに通っていなくても、大阪で練習相手は見つかりますか？</h3>
+    <p>見つかります。募集掲示板、格闘技サークル、SPARのような練習相手探しのアプリは、ジムに所属していなくても使えます。練習する時は、マットのあるレンタルスペースなどケガをしにくい場所を選びましょう。</p>
+    <h3>体重の合うスパーリング相手を探すには？</h3>
+    <p>所属ジムに同じくらいの体重の人がいなければ、出稽古でほかのジムの会員と練習するか、SPARで「自分の体重に合う練習会だけ表示」をオンにして探す方法があります。</p>
+    <h3>練習相手探しにお金はかかりますか？</h3>
+    <p>SPARは今はすべての機能を無料で使えます。出稽古の料金や、ほかのサービスの料金はそれぞれ事前に確認してください。</p>
+    <h3>初めての相手とのスパーリングが不安です。</h3>
+    <p>始める前に「技術練習だけ」「軽めのスパー」など強度をすり合わせておくと安心です。SPARでは、練習後の評価で相手がどんな人かを事前に確認できます。</p>
+  </div>
 
   <h2>まとめ</h2>
   <div class="table-wrap">
@@ -400,7 +466,7 @@
         <tr><td>出稽古</td><td>いつもと違う相手・環境で練習したい人</td></tr>
         <tr><td>募集掲示板</td><td>ジムに通っていない人、地域で気軽に探したい人</td></tr>
         <tr><td>格闘技サークル</td><td>決まった日に仲間と練習したい人</td></tr>
-        <tr class="spar"><td>SPAR</td><td>体重やレベルの合う相手を、自分の都合で探したい人</td></tr>
+        <tr class="spar"><td>SPAR</td><td>体重やレベルが合い、近くで練習できる相手を自分の都合で探したい人</td></tr>
       </tbody>
     </table>
   </div>
